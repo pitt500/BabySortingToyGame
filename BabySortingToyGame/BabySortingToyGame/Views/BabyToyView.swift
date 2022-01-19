@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct BabyToyView: View {
+    let currentToy = Toy(id: 1, color: .red)
+    @State var position = CGPoint(x: 100, y: 100)
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        DraggableToy(
+            toy: currentToy,
+            position: position,
+            gesture: DragGesture()
+        )
     }
 }
 
