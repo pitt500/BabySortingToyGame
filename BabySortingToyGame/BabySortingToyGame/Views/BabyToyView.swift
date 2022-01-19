@@ -13,6 +13,12 @@ struct BabyToyView: View {
     
     var drag: some Gesture {
         DragGesture()
+            .onChanged { state in
+                position = state.location
+            }
+            .onEnded { state in
+                position = CGPoint(x: 100, y: 100)
+            }
     }
     
     var body: some View {
