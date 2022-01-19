@@ -12,6 +12,7 @@
 		B5326B082798821900140F11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5326B072798821900140F11 /* Preview Assets.xcassets */; };
 		B5326B10279882C400140F11 /* Toy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5326B0F279882C400140F11 /* Toy.swift */; };
 		B5326B132798840700140F11 /* BabyToyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5326B122798840700140F11 /* BabyToyView.swift */; };
+		B5326B15279885CD00140F11 /* DraggableToy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5326B14279885CD00140F11 /* DraggableToy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		B5326B072798821900140F11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B5326B0F279882C400140F11 /* Toy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toy.swift; sourceTree = "<group>"; };
 		B5326B122798840700140F11 /* BabyToyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyToyView.swift; sourceTree = "<group>"; };
+		B5326B14279885CD00140F11 /* DraggableToy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableToy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				B5326B122798840700140F11 /* BabyToyView.swift */,
+				B5326B14279885CD00140F11 /* DraggableToy.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			files = (
 				B5326B132798840700140F11 /* BabyToyView.swift in Sources */,
 				B5326B10279882C400140F11 /* Toy.swift in Sources */,
+				B5326B15279885CD00140F11 /* DraggableToy.swift in Sources */,
 				B5326B012798821900140F11 /* BabySortingToyGameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
