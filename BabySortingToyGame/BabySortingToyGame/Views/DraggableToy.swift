@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct DraggableToy: View {
+    private let size: CGFloat = 100
     var body: some View {
         Circle()
             .fill(.red)
-            .frame(width: 100, height: 100)
+            .frame(width: size, height: size)
     }
 }
 
 struct DraggableToy_Previews: PreviewProvider {
     static var previews: some View {
         DraggableToy()
+.previewInterfaceOrientation(.landscapeLeft)
     }
 }
