@@ -11,11 +11,15 @@ struct BabyToyView: View {
     let currentToy = Toy(id: 1, color: .red)
     @State var position = CGPoint(x: 100, y: 100)
     
+    var drag: some Gesture {
+        DragGesture()
+    }
+    
     var body: some View {
         DraggableToy(
             toy: currentToy,
             position: position,
-            gesture: DragGesture()
+            gesture: drag
         )
     }
 }
