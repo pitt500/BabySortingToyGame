@@ -9,7 +9,9 @@ import SwiftUI
 
 struct DraggableToy: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Circle()
+            .fill(.red)
+            .frame(width: 100, height: 100)
     }
 }
 
