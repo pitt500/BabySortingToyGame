@@ -9,8 +9,6 @@ import SwiftUI
 
 struct BabyToyView: View {
     @StateObject private var viewModel = ToyViewModel()
-    let currentToy = Toy(id: 1, color: .red)
-    @State var position = CGPoint(x: 100, y: 100)
     let gridItems = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -20,10 +18,10 @@ struct BabyToyView: View {
     var drag: some Gesture {
         DragGesture()
             .onChanged { state in
-                position = state.location
+                viewModel.update(dragPosition: state.location)
             }
             .onEnded { state in
-                position = CGPoint(x: 100, y: 100)
+                viewModel.update(dragPosition: state.location)
             }
     }
     
@@ -38,8 +36,8 @@ struct BabyToyView: View {
                 }
             }
             DraggableToy(
-                toy: currentToy,
-                position: position,
+                toy: viewModel.currentToy,
+                position: viewModel.currentPosition,
                 gesture: drag
             )
         }
