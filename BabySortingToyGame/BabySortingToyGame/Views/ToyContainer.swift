@@ -10,12 +10,24 @@ import SwiftUI
 struct ToyContainer: View {
     let toy: Toy
     @ObservedObject var viewModel: ToyViewModel
-    private let size: CGFloat = 100
+    private let regularSize: CGFloat = 100
+    private let highlightedSize: CGFloat = 130
     
     var body: some View {
-        Circle()
-            .fill(toy.color)
-            .frame(width: size, height: size)
+        ZStack{
+            Circle()
+                .fill(toy.color)
+                .frame(width: regularSize, height: regularSize)
+            if viewModel.isHighlighted(id: toy.id) {
+                Circle()
+                    .fill(toy.color)
+                    .opacity(0.5)
+                    .frame(
+                        width: highlightedSize,
+                        height: highlightedSize
+                    )
+            }
+        }
             .overlay {
                 GeometryReader { proxy -> Color in
                     viewModel.update(
@@ -26,6 +38,7 @@ struct ToyContainer: View {
                     return Color.clear
                 }
             }
+            .frame(width: highlightedSize, height: highlightedSize)
     }
 }
 

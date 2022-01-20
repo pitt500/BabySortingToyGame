@@ -11,6 +11,7 @@ class ToyViewModel: ObservableObject {
     // MARK: - Gesture Properties
     let currentToy = Toy(id: 1, color: .red)
     @Published var currentPosition = initialPosition
+    @Published var highlightedId: Int?
     
     // MARK: - Coordinates
     private static let initialPosition = CGPoint(
@@ -29,6 +30,12 @@ class ToyViewModel: ObservableObject {
     
     func update(dragPosition: CGPoint) {
         currentPosition = dragPosition
+        for (id, frame) in frames where frame.contains(dragPosition) {
+            highlightedId = id
+            return
+        }
+        
+        highlightedId = nil
     }
     
     func update(isDragged: Bool) {
@@ -39,5 +46,9 @@ class ToyViewModel: ObservableObject {
     
     func resetPosition() {
         currentPosition = ToyViewModel.initialPosition
+    }
+    
+    func isHighlighted(id: Int) -> Bool {
+        highlightedId == id
     }
 }
