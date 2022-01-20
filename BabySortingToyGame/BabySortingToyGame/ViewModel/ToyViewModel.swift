@@ -41,6 +41,7 @@ class ToyViewModel: ObservableObject {
     func update(isDragged: Bool) {
         if isDragged == false {
             resetPosition()
+            highlightedId = nil
         }
     }
     
