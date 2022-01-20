@@ -14,6 +14,7 @@
 		B5326B132798840700140F11 /* BabyToyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5326B122798840700140F11 /* BabyToyView.swift */; };
 		B5326B15279885CD00140F11 /* DraggableToy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5326B14279885CD00140F11 /* DraggableToy.swift */; };
 		B5326B172798E28100140F11 /* ToyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5326B162798E28100140F11 /* ToyContainer.swift */; };
+		B5326B1C2798E85200140F11 /* ToyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5326B1B2798E85200140F11 /* ToyViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		B5326B122798840700140F11 /* BabyToyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyToyView.swift; sourceTree = "<group>"; };
 		B5326B14279885CD00140F11 /* DraggableToy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableToy.swift; sourceTree = "<group>"; };
 		B5326B162798E28100140F11 /* ToyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToyContainer.swift; sourceTree = "<group>"; };
+		B5326B1B2798E85200140F11 /* ToyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToyViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		B5326AFF2798821900140F11 /* BabySortingToyGame */ = {
 			isa = PBXGroup;
 			children = (
+				B5326B182798E83100140F11 /* ViewModel */,
 				B5326B11279883F400140F11 /* Views */,
 				B5326B0E279882BB00140F11 /* Model */,
 				B5326B002798821900140F11 /* BabySortingToyGameApp.swift */,
@@ -90,6 +93,14 @@
 				B5326B162798E28100140F11 /* ToyContainer.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B5326B182798E83100140F11 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B5326B1B2798E85200140F11 /* ToyViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +176,7 @@
 				B5326B172798E28100140F11 /* ToyContainer.swift in Sources */,
 				B5326B132798840700140F11 /* BabyToyView.swift in Sources */,
 				B5326B10279882C400140F11 /* Toy.swift in Sources */,
+				B5326B1C2798E85200140F11 /* ToyViewModel.swift in Sources */,
 				B5326B15279885CD00140F11 /* DraggableToy.swift in Sources */,
 				B5326B012798821900140F11 /* BabySortingToyGameApp.swift in Sources */,
 			);
