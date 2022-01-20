@@ -30,9 +30,7 @@ struct BabyToyView: View {
         ZStack {
             LazyVGrid(columns: gridItems, spacing: 100) {
                 ForEach(0..<6, id: \.self) { _ in
-                    Circle()
-                        .fill(.blue)
-                        .frame(width: 100, height: 100)
+                    ToyContainer()
                 }
             }
             DraggableToy(
