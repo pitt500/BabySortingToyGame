@@ -10,9 +10,13 @@ import SwiftUI
 class ToyViewModel: ObservableObject {
     // MARK: - Gesture Properties
     let currentToy = Toy(id: 1, color: .red)
-    @Published var currentPosition = CGPoint(x: 100, y: 100)
+    @Published var currentPosition = initialPosition
     
     // MARK: - Coordinates
+    private static let initialPosition = CGPoint(
+        x: UIScreen.main.bounds.midX,
+        y: UIScreen.main.bounds.maxY - 100
+    )
     private var frames: [Int: CGRect] = [:]
     
     // MARK: - Objects in the screen
@@ -25,5 +29,15 @@ class ToyViewModel: ObservableObject {
     
     func update(dragPosition: CGPoint) {
         currentPosition = dragPosition
+    }
+    
+    func update(isDragged: Bool) {
+        if isDragged == false {
+            resetPosition()
+        }
+    }
+    
+    func resetPosition() {
+        currentPosition = ToyViewModel.initialPosition
     }
 }
