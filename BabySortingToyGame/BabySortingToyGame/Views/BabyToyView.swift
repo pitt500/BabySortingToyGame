@@ -19,11 +19,12 @@ struct BabyToyView: View {
         DragGesture()
             .onChanged { state in
                 viewModel.update(dragPosition: state.location)
-                viewModel.update(isDragged: true)
             }
             .onEnded { state in
                 viewModel.update(dragPosition: state.location)
-                viewModel.update(isDragged: false)
+                withAnimation {
+                    viewModel.confirmDrop()
+                }
             }
     }
     
@@ -42,6 +43,7 @@ struct BabyToyView: View {
                 position: viewModel.currentPosition,
                 gesture: drag
             )
+                .opacity(viewModel.draggableToyOpacity)
         }
     }
 }

@@ -12,6 +12,7 @@ class ToyViewModel: ObservableObject {
     let currentToy = Toy(id: 1, color: .red)
     @Published var currentPosition = initialPosition
     @Published var highlightedId: Int?
+    @Published var draggableToyOpacity: CGFloat = 1.0
     
     // MARK: - Coordinates
     private static let initialPosition = CGPoint(
@@ -38,10 +39,22 @@ class ToyViewModel: ObservableObject {
         highlightedId = nil
     }
     
-    func update(isDragged: Bool) {
-        if isDragged == false {
+    func confirmDrop() {
+        defer { highlightedId = nil }
+        
+        guard let highlightedId = highlightedId else {
             resetPosition()
-            highlightedId = nil
+            return
+        }
+        
+        if highlightedId == currentToy.id {
+            guard let frame = frames[highlightedId] else {
+                return
+            }
+            currentPosition = CGPoint(x: frame.midX, y: frame.midY)
+            draggableToyOpacity = 0
+        } else {
+            resetPosition()
         }
     }
     
