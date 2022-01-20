@@ -12,6 +12,13 @@ struct ToyContainer: View {
         Circle()
             .fill(.blue)
             .frame(width: 100, height: 100)
+            .overlay {
+                GeometryReader { proxy -> Color in
+                    let frame = proxy.frame(in: .global)
+                    
+                    return Color.clear
+                }
+            }
     }
 }
 
