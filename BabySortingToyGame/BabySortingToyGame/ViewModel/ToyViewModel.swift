@@ -9,10 +9,12 @@ import SwiftUI
 
 class ToyViewModel: ObservableObject {
     // MARK: - Gesture Properties
-    let currentToy = Toy(id: 1, color: .red)
+    @Published var currentToy: Toy?
     @Published var currentPosition = initialPosition
     @Published var highlightedId: Int?
     @Published var draggableToyOpacity: CGFloat = 1.0
+    @Published var isGameOver = false
+    private(set) var attempts = 0
     
     // MARK: - Coordinates
     private static let initialPosition = CGPoint(
@@ -22,7 +24,47 @@ class ToyViewModel: ObservableObject {
     private var frames: [Int: CGRect] = [:]
     
     // MARK: - Objects in the screen
-    var toyContainers = Toy.all
+    private var toys = Array(Toy.all.shuffled().prefix(upTo: 3))
+    var toyContainers = Toy.all.shuffled()
+    
+    // MARK: - Game lifecycle
+    func setupGame() {
+        currentToy = toys.popLast()
+    }
+    
+    func nextRound() {
+        currentToy = toys.popLast()
+        
+        if currentToy == nil {
+            gameOver()
+        } else {
+            prepareObjects()
+        }
+        
+    }
+    
+    func gameOver() {
+        isGameOver = true
+    }
+    
+    func generateNewGame() {
+        toys = Array(Toy.all.shuffled().prefix(upTo: 3))
+        attempts = 0
+        nextRound()
+    }
+    
+    func prepareObjects() {
+        withAnimation {
+            toyContainers.shuffle()
+        }
+        
+        withAnimation(.none) {
+            resetPosition()
+            withAnimation {
+                draggableToyOpacity = 1.0
+            }
+        }
+    }
     
     // MARK: - Updates in the screen
     func update(frame: CGRect, for id: Int) {
@@ -47,15 +89,18 @@ class ToyViewModel: ObservableObject {
             return
         }
         
-        if highlightedId == currentToy.id {
+        if highlightedId == currentToy?.id {
             guard let frame = frames[highlightedId] else {
                 return
             }
             currentPosition = CGPoint(x: frame.midX, y: frame.midY)
             draggableToyOpacity = 0
+            nextRound()
         } else {
             resetPosition()
         }
+        
+        attempts += 1
     }
     
     func resetPosition() {

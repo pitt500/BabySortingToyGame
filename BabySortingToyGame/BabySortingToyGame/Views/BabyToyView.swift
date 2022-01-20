@@ -38,13 +38,32 @@ struct BabyToyView: View {
                     )
                 }
             }
-            DraggableToy(
-                toy: viewModel.currentToy,
-                position: viewModel.currentPosition,
-                gesture: drag
-            )
-                .opacity(viewModel.draggableToyOpacity)
+            if let currentToy = viewModel.currentToy {
+                DraggableToy(
+                    toy: currentToy,
+                    position: viewModel.currentPosition,
+                    gesture: drag
+                )
+                    .opacity(viewModel.draggableToyOpacity)
+            }
         }
+        .onAppear {
+            viewModel.setupGame()
+        }
+        .alert(
+            Text("Congratulations, you won! 🎉"),
+            isPresented: $viewModel.isGameOver,
+            actions: {
+                Button("OK") {
+                    withAnimation {
+                        viewModel.generateNewGame()
+                    }
+                }
+            },
+            message: {
+                Text("Number of attemps: \(viewModel.attempts)")
+            }
+        )
     }
 }
 
