@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BabyToyView: View {
+    @StateObject private var viewModel = ToyViewModel()
     let currentToy = Toy(id: 1, color: .red)
     @State var position = CGPoint(x: 100, y: 100)
     let gridItems = [
@@ -29,8 +30,11 @@ struct BabyToyView: View {
     var body: some View {
         ZStack {
             LazyVGrid(columns: gridItems, spacing: 100) {
-                ForEach(0..<6, id: \.self) { _ in
-                    ToyContainer()
+                ForEach(viewModel.toyContainers, id: \.id) { toy in
+                    ToyContainer(
+                        toy: toy,
+                        viewModel: viewModel
+                    )
                 }
             }
             DraggableToy(

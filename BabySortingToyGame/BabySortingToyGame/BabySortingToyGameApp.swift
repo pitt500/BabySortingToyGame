@@ -11,7 +11,7 @@ import SwiftUI
 struct BabySortingToyGameApp: App {
     var body: some Scene {
         WindowGroup {
-            ToyContainer()
+            BabyToyView()
         }
     }
 }
