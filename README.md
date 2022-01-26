@@ -4,10 +4,12 @@ This is a demo to build a little mini-game "for babies". It's inspired in this k
 
 A game to sort shapes in the correct location.
 
+# Video with the implementation
 [Link to the video](https://youtu.be/ylcEQHYev1U)
 ![Baby Toy SwiftUI](babyToyVideo.jpeg)
 It was made in SwiftUI using drag gestures and other resources.
 
+# The basics
 You can check out the basics of drag gesture here too 👉🏻 [Link to the video](https://youtu.be/muHDX4ij_EQ)
 ![Drag Gestures in SwiftUI](/dragGestures.jpeg)
 
