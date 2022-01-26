@@ -8,8 +8,7 @@ A game to sort shapes in the correct location.
 ![Baby Toy SwiftUI](babyToyVideo.jpeg)
 It was made in SwiftUI using drag gestures and other resources.
 
-You can check out the basics of drag gesture here too 👇🏻
-[Link to the video](https://youtu.be/muHDX4ij_EQ)
+You can check out the basics of drag gesture here too 👉🏻 [Link to the video](https://youtu.be/muHDX4ij_EQ)
 ![Drag Gestures in SwiftUI](/dragGestures.jpeg)
 
 ## Requirements
