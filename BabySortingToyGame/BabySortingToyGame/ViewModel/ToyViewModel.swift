@@ -28,8 +28,38 @@ class ToyViewModel: ObservableObject {
     var toyContainers = Toy.all.shuffled()
     
     // MARK: - Game lifecycle
-    func setNextToy() {
-        currentToy = toys.popLast()
+    func confirmWhereToyWasDropped() {
+        defer { highlightedId = nil }
+        
+        guard let highlightedId = highlightedId else {
+            resetPosition()
+            return
+        }
+        
+        if highlightedId == currentToy?.id {
+            setCurrentPositionToHighlightedContainer(WithId: highlightedId)
+            generateNextRound()
+        } else {
+            resetPosition()
+        }
+        
+        attempts += 1
+    }
+    
+    func resetPosition() {
+        currentPosition = ToyViewModel.initialPosition
+    }
+    
+    func setCurrentPositionToHighlightedContainer(WithId id: Int) {
+        guard let frame = frames[id] else {
+            return
+        }
+        currentPosition = CGPoint(x: frame.midX, y: frame.midY)
+        makeToyInvisible()
+    }
+    
+    func makeToyInvisible() {
+        draggableToyOpacity = 0
     }
     
     func generateNextRound() {
@@ -42,14 +72,12 @@ class ToyViewModel: ObservableObject {
         }
     }
     
-    func gameOver() {
-        isGameOver = true
+    func setNextToy() {
+        currentToy = toys.popLast()
     }
     
-    func generateNewGame() {
-        toys = Array(Toy.all.shuffled().prefix(upTo: 3))
-        attempts = 0
-        generateNextRound()
+    func gameOver() {
+        isGameOver = true
     }
     
     func prepareObjects() {
@@ -70,14 +98,16 @@ class ToyViewModel: ObservableObject {
         }
     }
     
-    func resetPosition() {
-        currentPosition = ToyViewModel.initialPosition
-    }
-    
     func restoreOpacityWithAnimation() {
         withAnimation {
             draggableToyOpacity = 1.0
         }
+    }
+    
+    func generateNewGame() {
+        toys = Array(Toy.all.shuffled().prefix(upTo: 3))
+        attempts = 0
+        generateNextRound()
     }
     
     // MARK: - Updates in the screen
@@ -93,36 +123,6 @@ class ToyViewModel: ObservableObject {
         }
         
         highlightedId = nil
-    }
-    
-    func confirmWhereToyWasDropped() {
-        defer { highlightedId = nil }
-        
-        guard let highlightedId = highlightedId else {
-            resetPosition()
-            return
-        }
-        
-        if highlightedId == currentToy?.id {
-            setCurrentPositionToHighlightedContainer(WithId: highlightedId)
-            generateNextRound()
-        } else {
-            resetPosition()
-        }
-        
-        attempts += 1
-    }
-    
-    func setCurrentPositionToHighlightedContainer(WithId id: Int) {
-        guard let frame = frames[id] else {
-            return
-        }
-        currentPosition = CGPoint(x: frame.midX, y: frame.midY)
-        draggableToyOpacity = 0
-    }
-    
-    func makeToyInvisible() {
-        draggableToyOpacity = 0
     }
     
     func isHighlighted(id: Int) -> Bool {
