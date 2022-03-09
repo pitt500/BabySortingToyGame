@@ -121,6 +121,10 @@ class ToyViewModel: ObservableObject {
         draggableToyOpacity = 0
     }
     
+    func makeToyInvisible() {
+        draggableToyOpacity = 0
+    }
+    
     func isHighlighted(id: Int) -> Bool {
         highlightedId == id
     }
