@@ -23,7 +23,7 @@ struct BabyToyView: View {
             .onEnded { state in
                 viewModel.update(dragPosition: state.location)
                 withAnimation {
-                    viewModel.confirmDrop()
+                    viewModel.confirmWhereToyWasDropped()
                 }
             }
     }
@@ -48,7 +48,7 @@ struct BabyToyView: View {
             }
         }
         .onAppear {
-            viewModel.setupGame()
+            viewModel.setNextToy()
         }
         .alert(
             Text("Congratulations, you won! 🎉"),

@@ -28,19 +28,18 @@ class ToyViewModel: ObservableObject {
     var toyContainers = Toy.all.shuffled()
     
     // MARK: - Game lifecycle
-    func setupGame() {
+    func setNextToy() {
         currentToy = toys.popLast()
     }
     
-    func nextRound() {
-        currentToy = toys.popLast()
+    func generateNextRound() {
+        setNextToy()
         
         if currentToy == nil {
             gameOver()
         } else {
             prepareObjects()
         }
-        
     }
     
     func gameOver() {
@@ -50,19 +49,34 @@ class ToyViewModel: ObservableObject {
     func generateNewGame() {
         toys = Array(Toy.all.shuffled().prefix(upTo: 3))
         attempts = 0
-        nextRound()
+        generateNextRound()
     }
     
     func prepareObjects() {
+        shuffleToyContainersWithAnimation()
+        resetCurrentToyWithoutAnimation()
+    }
+    
+    func shuffleToyContainersWithAnimation() {
         withAnimation {
             toyContainers.shuffle()
         }
-        
+    }
+    
+    func resetCurrentToyWithoutAnimation() {
         withAnimation(.none) {
             resetPosition()
-            withAnimation {
-                draggableToyOpacity = 1.0
-            }
+            restoreOpacityWithAnimation()
+        }
+    }
+    
+    func resetPosition() {
+        currentPosition = ToyViewModel.initialPosition
+    }
+    
+    func restoreOpacityWithAnimation() {
+        withAnimation {
+            draggableToyOpacity = 1.0
         }
     }
     
@@ -81,7 +95,7 @@ class ToyViewModel: ObservableObject {
         highlightedId = nil
     }
     
-    func confirmDrop() {
+    func confirmWhereToyWasDropped() {
         defer { highlightedId = nil }
         
         guard let highlightedId = highlightedId else {
@@ -90,12 +104,8 @@ class ToyViewModel: ObservableObject {
         }
         
         if highlightedId == currentToy?.id {
-            guard let frame = frames[highlightedId] else {
-                return
-            }
-            currentPosition = CGPoint(x: frame.midX, y: frame.midY)
-            draggableToyOpacity = 0
-            nextRound()
+            setCurrentPositionToHighlightedContainer(WithId: highlightedId)
+            generateNextRound()
         } else {
             resetPosition()
         }
@@ -103,8 +113,12 @@ class ToyViewModel: ObservableObject {
         attempts += 1
     }
     
-    func resetPosition() {
-        currentPosition = ToyViewModel.initialPosition
+    func setCurrentPositionToHighlightedContainer(WithId id: Int) {
+        guard let frame = frames[id] else {
+            return
+        }
+        currentPosition = CGPoint(x: frame.midX, y: frame.midY)
+        draggableToyOpacity = 0
     }
     
     func isHighlighted(id: Int) -> Bool {
